@@ -1,9 +1,6 @@
 # docker-dnsmasq
 
-dnsmasq in a docker container, configurable via a [simple web UI](https://github.com/jpillora/webproc)
-
-[![Docker Pulls](https://img.shields.io/docker/pulls/jpillora/dnsmasq.svg)][dockerhub]
-[![Image Size](https://images.microbadger.com/badges/image/jpillora/dnsmasq.svg)][dockerhub]
+Dnsmasq docker容器, 通过UI管理配置 [simple web UI](https://github.com/jpillora/webproc)
 
 ### Usage
 
@@ -17,8 +14,8 @@ dnsmasq in a docker container, configurable via a [simple web UI](https://github
 	#dont use hosts nameservers
 	no-resolv
 	#use google as default nameservers
-	server=8.8.4.4
-	server=8.8.8.8
+	server=114.114.114.114
+	server=223.5.5.5
 	#serve all .company queries using a specific nameserver
 	server=/company/10.0.0.1
 	#explicitly define host-ip mappings
@@ -27,19 +24,18 @@ dnsmasq in a docker container, configurable via a [simple web UI](https://github
 
 1. Run the container
 
-	```
-	$ docker run \
-		--name dnsmasq \
-		-d \
-		-p 53:53/udp \
-		-p 5380:8080 \
-		-v /opt/dnsmasq.conf:/etc/dnsmasq.conf \
-		--log-opt "max-size=100m" \
-		-e "HTTP_USER=foo" \
-		-e "HTTP_PASS=bar" \
-		--restart always \
-		jpillora/dnsmasq
-	```
+	```bash
+	docker run \
+     --name dnsmasq \
+     -d \
+     -p 53:53/udp \
+     -p 8080:8080 \
+     --log-opt "max-size=100m" \
+     -e "HTTP_USER=admin" \
+     -e "HTTP_PASS=admin" \
+     --restart always \
+     hongxiaolu/dnsmasq
+    ```
 
 1. Visit `http://<docker-host>:5380`, authenticate with `foo/bar` and you should see
 
