@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:edge
 
 # webproc release settings
 ENV WEBPROC_VERSION v0.3.3
